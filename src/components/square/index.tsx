@@ -1,3 +1,5 @@
+import { Button } from "./styles";
+
 interface SquareProps {
     value: string;
     onClick: () => void;
@@ -5,6 +7,8 @@ interface SquareProps {
 
 export function Square( {value, onClick} : SquareProps ) {
     return (
-        <button type="button" onClick={() => onClick()} >{value}</button>
+        <Button isX={value==='X'} type="button" onClick={() => onClick()}>
+            {value}
+        </Button>
     );
 }
