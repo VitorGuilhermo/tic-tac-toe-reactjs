@@ -1,13 +1,10 @@
-import { useState } from "react";
-
 interface SquareProps {
-    pos: number;
+    value: string;
+    onClick: () => void;
 }
 
-export function Square( {pos} : SquareProps ) {
-    const [value, setValue] = useState('');
-
+export function Square( {value, onClick} : SquareProps ) {
     return (
-        <button type="button" onClick={() => setValue('X')}>{value}</button>
+        <button type="button" onClick={() => onClick()} >{value}</button>
     );
 }

@@ -3,11 +3,26 @@ import { Square } from '../square/index';
 
 import { Container, Content } from './styles';
 
-export function Board() {
-    const [squares, setSquares] =  useState(Array(9).fill(null));
+interface BoardProps {
+    setNextPlayer: (value: string) => void;
+}
 
-    function renderSquare(index : number) {
-        return <Square pos={squares[index]} />
+export function Board({setNextPlayer}: BoardProps) {
+    const [squares, setSquares] =  useState(Array(9).fill(null));
+    const [xIsNext, setXIsNext] = useState(true);
+
+    function handleClick(index: number) {
+        const newSquares = squares.slice();
+        newSquares[index] = xIsNext ? 'X' : 'O';
+        setSquares(newSquares);
+        setXIsNext(!xIsNext);
+        setNextPlayer(!xIsNext ? 'X' : 'O');
+    }
+
+    function renderSquare(index: number) {
+        return (
+            <Square value={squares[index]} onClick={() => handleClick(index)} />
+        );
     }
 
     return (
